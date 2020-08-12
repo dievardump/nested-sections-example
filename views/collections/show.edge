@@ -1,0 +1,20 @@
+@layout('app')
+
+@section('content')
+  <style>
+    .collection {
+      padding: 20px;
+    }
+  </style>
+  <article class="collection">
+    <h2>{{collection.name}} | {{collection.year}}</h2>
+    @section('collection-content')
+      @each(item in items)
+        <a href="{{route('items.show', { params : { collection: collection.id, item: item.id } })}}">{{item.name}}</a>
+      @else
+        <p class="notice">You do not seem to have created an item for this collection.</p>
+      @endeach
+      <a href="{{route('items.create', { params: { collection: collection.id }})}}" class="button">New Item</a>
+    @endsection
+  </article>
+@endsection

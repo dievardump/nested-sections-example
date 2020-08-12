@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>My Collections</title>
+  <style>
+    html, body {
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      border-sizing: border-box;
+    }
+
+    .button {
+      padding: 10px 15px;
+      background-color: cadetblue;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      display: inline-block;
+      min-width: 160px;
+      text-align: center;
+    }
+
+    .button:any-link {
+      text-decoration: none;
+    }
+
+    .notice {
+      font-style: italic;
+      font-size: .8em;
+    }
+
+    .notice.--error {
+      color: red;
+    }
+
+    .site__header {
+      padding: 20px;
+      border-bottom: 2px solid gray;
+    }
+
+    main {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header class="site__header"><h1>My collections</h1></header>
+  <main>
+    @section('content')
+    @each(collection in collections)
+    <div><a href="{{route('collections.show', { params : { collection: collection.id } })}}">{{collection.name}} | {{collection.year}}</a></div>
+    @else
+    <p class="notice">You do not seem to have created a collection.</p>
+    @endeach
+    <a href="{{route('collections.create')}}" class="button">New Collection</a>
+    @endsection
+  </main>
+  </body>
+</html>
